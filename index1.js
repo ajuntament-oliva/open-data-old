@@ -19,7 +19,7 @@ pyramidChart.numberFormatter.bigNumberPrefixes = [
   { "number": 1e+3, "suffix": "M" }
 ];
 
-pyramidChart.dataSource.url = "un_population_age_groups(2).csv";
+pyramidChart.dataSource.url = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/un_population_age_groups.csv";
 pyramidChart.dataSource.parser = new am4core.CSVParser();
 pyramidChart.dataSource.parser.options.numberFields = ["col5", "col6", "col7"];
 pyramidChart.dataSource.events.on("parseended", function(ev) {
@@ -80,7 +80,7 @@ pyramidXAxisMale.max = 15000;
 var maleRange = pyramidXAxisMale.axisRanges.create();
 maleRange.value = 0;
 maleRange.endValue = 20000;
-maleRange.label.text = "Homes";
+maleRange.label.text = "Males";
 maleRange.label.inside = true;
 maleRange.label.valign = "top";
 maleRange.label.fontSize = 20;
@@ -94,7 +94,7 @@ pyramidXAxisFemale.renderer.inversed = true;
 var maleRange = pyramidXAxisFemale.axisRanges.create();
 maleRange.value = 0;
 maleRange.endValue = 20000;
-maleRange.label.text = "Dones";
+maleRange.label.text = "Females";
 maleRange.label.inside = true;
 maleRange.label.valign = "top";
 maleRange.label.fontSize = 20;
@@ -106,7 +106,7 @@ var pyramidYAxis = pyramidChart.yAxes.push(new am4charts.CategoryAxis());
 pyramidYAxis.dataFields.category = "col4";
 pyramidYAxis.renderer.minGridDistance = 10;
 pyramidYAxis.renderer.grid.template.location = 0;
-pyramidYAxis.title.text = "Grup d'edad";
+pyramidYAxis.title.text = "Age groups";
 pyramidYAxis.renderer.labels.template.adapter.add("textOutput", function(text, target) {
   if (text == "80-84") {
     text += "*";
@@ -121,16 +121,16 @@ pyramidSeriesMale.tooltipText = "{valueX}";
 pyramidSeriesMale.name = "Male";
 pyramidSeriesMale.xAxis = pyramidXAxisMale;
 pyramidSeriesMale.clustered = false;
-pyramidSeriesMale.columns.template.tooltipText = "Homes, edad{categoryY}: {valueX} ({valueX.percent.formatNumber('#.0')}%)";
+pyramidSeriesMale.columns.template.tooltipText = "Males, age{categoryY}: {valueX} ({valueX.percent.formatNumber('#.0')}%)";
 
 var pyramidSeriesFemale = pyramidChart.series.push(new am4charts.ColumnSeries());
 pyramidSeriesFemale.dataFields.categoryY = "col4";
 pyramidSeriesFemale.dataFields.valueX = "col6";
 pyramidSeriesFemale.tooltipText = "{valueX}";
-pyramidSeriesFemale.name = "Dones";
+pyramidSeriesFemale.name = "Female";
 pyramidSeriesFemale.xAxis = pyramidXAxisFemale;
 pyramidSeriesFemale.clustered = false;
-pyramidSeriesFemale.columns.template.tooltipText = "Dones, edad{categoryY}: {valueX} ({valueX.percent.formatNumber('#.0')}%)";
+pyramidSeriesFemale.columns.template.tooltipText = "Females, age{categoryY}: {valueX} ({valueX.percent.formatNumber('#.0')}%)";
 
 var pyramidTitle = pyramidChart.titles.create();
 pyramidTitle.text = currentYear;
@@ -138,8 +138,7 @@ pyramidTitle.fontSize = 20;
 pyramidTitle.marginBottom = 22;
 
 var note = pyramidChart.tooltipContainer.createChild(am4core.Label);
-//legenda
-note.text = ""
+note.text = "* Until 1990 U.S. did not collect detailed age stats for persons above 80. For years prior to 1990 this category represents all 80+ persons."
 note.fontSize = 10;
 note.valign = "bottom";
 note.align = "center";
@@ -152,15 +151,15 @@ popChart.marginLeft = 15;
 popChart.data = [{}];
 
 var popSubtitle = popChart.titles.create();
-popSubtitle.text = "(passa el punter per el gràfic per a vore l'actualizació)";
+popSubtitle.text = "(hover to see breakdown)";
 
 var popTitle = popChart.titles.create();
-popTitle.text = "Població Oliva";
+popTitle.text = "Oliva població";
 popTitle.fontSize = 20;
 
-popChart.numberFormatter.numberFormat = "#.###,#a";
+popChart.numberFormatter.numberFormat = "#,###.#a";
 popChart.numberFormatter.bigNumberPrefixes = [
-  { "number": 1, "suffix": "" }
+  { "number": 1e+3, "suffix": "M" }
 ];
 
 popChart.dateFormatter.dateFormat = "yyyy";
@@ -189,10 +188,10 @@ popSeriesFemale.propertyFields.fillOpacity = "opacity";
 popSeriesFemale.stacked = true;
 popSeriesFemale.strokeWidth = 2;
 popSeriesFemale.fillOpacity = 0.5;
-popSeriesFemale.tooltipText = "[bold]Població Oliva en {dateX}[/]\n[font-size: 20]Home: {col4}\nDona: {col5}";
-popSeriesFemale.name = "Dona";
+popSeriesFemale.tooltipText = "[bold]Població Oliva en {dateX}[/]\n[font-size: 20]Male: {col4}\nFemale: {col5}";
+popSeriesFemale.name = "Female";
 
-popChart.dataSource.url = "un_population.csv";
+popChart.dataSource.url = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/un_population.csv";
 popChart.dataSource.parser = new am4core.CSVParser();
 popChart.dataSource.parser.options.numberFields = ["col4", "col5", "col6"];
 popChart.dataSource.adapter.add("parsedData", function(data) {
