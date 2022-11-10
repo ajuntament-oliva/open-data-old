@@ -1,14 +1,27 @@
+
 am4core.useTheme(am4themes_dataviz);
 
+function am4themes_myTheme(target) {
+  if (target instanceof am4charts.ValueAxis) {
+    target.background.fill = am4core.color("#00A3AD");
+  }
+}
+
+
+var w = window.innerWidth;
 /**
  * Create container for charts
  */
 var container = am4core.create("chartdiv", am4core.Container);
 container.width = am4core.percent(100);
 container.height = am4core.percent(100);
-container.layout = "horizontal";
-container.layout = "horizontal";
+console.log(w);
+if(w<700){
+  container.layout = "vertical";
 
+}else{
+  container.layout = "horizontal";
+}
 /**
  * Population pyramid chart
  */
@@ -76,25 +89,25 @@ var sourceData = [];
 
 var pyramidXAxisMale = pyramidChart.xAxes.push(new am4charts.ValueAxis());
 pyramidXAxisMale.min = 0;
-pyramidXAxisMale.max = 3000;
+pyramidXAxisMale.max = 2000;
 
 var maleRange = pyramidXAxisMale.axisRanges.create();
 maleRange.value = 0;
-maleRange.endValue = 3000;
+maleRange.endValue = 2000;
 maleRange.label.text = "Homes";
 maleRange.label.inside = true;
 maleRange.label.valign = "top";
 maleRange.label.fontSize = 20;
-maleRange.label.fill = pyramidChart.colors.getIndex(0);
-
+// maleRange.label.fill = pyramidChart.colors.getIndex(0);
+am4themes_myTheme(maleRange);
 var pyramidXAxisFemale = pyramidChart.xAxes.push(new am4charts.ValueAxis());
 pyramidXAxisFemale.min = 0;
-pyramidXAxisFemale.max = 3000;
+pyramidXAxisFemale.max = 2000;
 pyramidXAxisFemale.renderer.inversed = true;
 
 var maleRange = pyramidXAxisFemale.axisRanges.create();
 maleRange.value = 0;
-maleRange.endValue = 3000;
+maleRange.endValue = 2000;
 maleRange.label.text = "Dones";
 maleRange.label.inside = true;
 maleRange.label.valign = "top";
@@ -107,7 +120,7 @@ var pyramidYAxis = pyramidChart.yAxes.push(new am4charts.CategoryAxis());
 pyramidYAxis.dataFields.category = "col4";
 pyramidYAxis.renderer.minGridDistance = 10;
 pyramidYAxis.renderer.grid.template.location = 0;
-pyramidYAxis.title.text = "Grup d'edad";
+pyramidYAxis.title.text = "Grups d'edat";
 pyramidYAxis.renderer.labels.template.adapter.add("textOutput", function(text, target) {
   if (text == "80-84") {
     text += "";
@@ -153,7 +166,7 @@ popChart.marginLeft = 15;
 popChart.data = [{}];
 
 var popSubtitle = popChart.titles.create();
-popSubtitle.text = "(passa el punter per el gràfic per a vore l'actualizació)";
+popSubtitle.text = "";
 
 var popTitle = popChart.titles.create();
 popTitle.text = "Població Oliva";
@@ -180,7 +193,7 @@ popSeriesMale.propertyFields.fillOpacity = "opacity";
 popSeriesMale.stacked = true;
 popSeriesMale.strokeWidth = 2;
 popSeriesMale.fillOpacity = 0.5;
-popSeriesMale.name = "Male";
+popSeriesMale.name = "Home";
 
 var popSeriesFemale = popChart.series.push(new am4charts.LineSeries());
 popSeriesFemale.dataFields.dateX = "col3";
@@ -217,3 +230,11 @@ popChart.cursor.events.on("hidden", function(ev) {
   var currentYear = new Date().getFullYear().toString();
   updateData();
 });
+let ocultar=document.querySelector("g[aria-labelledby='id-39-title']");
+ocultar.style.display="none";
+ocultar.classList.add("d-none");
+console.log();
+let d=document.querySelectorAll("g[role='region']")[0];
+d.style.width="none";
+d.parentNode.setAttribute("style","display:flex; flex-direction:column;");
+console.log(d.parentNode);
