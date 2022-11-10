@@ -7,6 +7,7 @@ var container = am4core.create("chartdiv", am4core.Container);
 container.width = am4core.percent(100);
 container.height = am4core.percent(100);
 container.layout = "horizontal";
+container.layout = "horizontal";
 
 /**
  * Population pyramid chart
@@ -19,9 +20,9 @@ pyramidChart.numberFormatter.bigNumberPrefixes = [
   { "number": 1e+3, "suffix": "M" }
 ];
 
-pyramidChart.dataSource.url = "un_population_age_groups(2).csv";
+pyramidChart.dataSource.url = "un_population_age_groups.csv";
 pyramidChart.dataSource.parser = new am4core.CSVParser();
-pyramidChart.dataSource.parser.options.numberFields = ["col8", "col9", "col10"];
+pyramidChart.dataSource.parser.options.numberFields = ["col6", "col7", "col10"];
 pyramidChart.dataSource.events.on("parseended", function(ev) {
   sourceData = ev.target.data;
   ev.target.data = getCurrentData();
@@ -59,8 +60,8 @@ function updateData() {
       pyramidChart.data[i].col6 = 0;
     }
     else {
-      pyramidChart.data[i].col8 = data[i].col8;
-      pyramidChart.data[i].col9 = data[i].col9;
+      pyramidChart.data[i].col6 = data[i].col6;
+      pyramidChart.data[i].col7 = data[i].col7;
     }
   });
   pyramidChart.invalidateRawData();
@@ -116,7 +117,7 @@ pyramidYAxis.renderer.labels.template.adapter.add("textOutput", function(text, t
 
 var pyramidSeriesMale = pyramidChart.series.push(new am4charts.ColumnSeries());
 pyramidSeriesMale.dataFields.categoryY = "col4";
-pyramidSeriesMale.dataFields.valueX = "col8";
+pyramidSeriesMale.dataFields.valueX = "col6";
 pyramidSeriesMale.tooltipText = "{valueX}";
 pyramidSeriesMale.name = "Homes";
 pyramidSeriesMale.xAxis = pyramidXAxisMale;
@@ -125,7 +126,7 @@ pyramidSeriesMale.columns.template.tooltipText = "Homes, edad{categoryY}: {value
 
 var pyramidSeriesFemale = pyramidChart.series.push(new am4charts.ColumnSeries());
 pyramidSeriesFemale.dataFields.categoryY = "col4";
-pyramidSeriesFemale.dataFields.valueX = "col9";
+pyramidSeriesFemale.dataFields.valueX = "col7";
 pyramidSeriesFemale.tooltipText = "{valueX}";
 pyramidSeriesFemale.name = "Dones";
 pyramidSeriesFemale.xAxis = pyramidXAxisFemale;
