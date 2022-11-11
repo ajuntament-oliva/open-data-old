@@ -215,3 +215,13 @@ popChart.cursor.events.on("hidden", function(ev) {
   var currentYear = new Date().getFullYear().toString();
   updateData();
 });
+//open csv and parse to txt format
+
+function updateData() {
+  popChart.dataSource.adapter.removeAll();
+  popChart.dataSource.adapter.addData(popChart.data);
+  popChart.dataSource.adapter.loadData();
+  popChart.series[0].dataFields.dateX = "col3";
+  popChart.series[0].dataFields.valueY = "col4";
+}
+
