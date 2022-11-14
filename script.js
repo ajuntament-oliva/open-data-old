@@ -48,9 +48,9 @@ pyramidChart.numberFormatter.bigNumberPrefixes = [
   { "number": 1e+3, "suffix": "M" }
 ];
 
-pyramidChart.dataSource.url = "un_population_age_groups.csv";
+pyramidChart.dataSource.url = "poblacio.csv";
 pyramidChart.dataSource.parser = new am4core.CSVParser();
-pyramidChart.dataSource.parser.options.numberFields = ["col6", "col7", "col10"];
+pyramidChart.dataSource.parser.options.numberFields = ["col5", "col6", "col7"];
 pyramidChart.dataSource.events.on("parseended", function(ev) {
   sourceData = ev.target.data;
   ev.target.data = getCurrentData();
@@ -88,8 +88,8 @@ function updateData() {
       pyramidChart.data[i].col6 = 0;
     }
     else {
+      pyramidChart.data[i].col5 = data[i].col5;
       pyramidChart.data[i].col6 = data[i].col6;
-      pyramidChart.data[i].col7 = data[i].col7;
     }
   });
   pyramidChart.invalidateRawData();
@@ -154,7 +154,7 @@ pyramidSeriesMale.columns.template.tooltipText = "Homes, edad{categoryY}: {value
 
 var pyramidSeriesFemale = pyramidChart.series.push(new am4charts.ColumnSeries());
 pyramidSeriesFemale.dataFields.categoryY = "col4";
-pyramidSeriesFemale.dataFields.valueX = "col7";
+pyramidSeriesFemale.dataFields.valueX = "col5";
 pyramidSeriesFemale.tooltipText = "{valueX}";
 pyramidSeriesFemale.name = "Dones";
 pyramidSeriesFemale.xAxis = pyramidXAxisFemale;
@@ -219,12 +219,14 @@ popSeriesFemale.propertyFields.fillOpacity = "opacity";
 popSeriesFemale.stacked = true;
 popSeriesFemale.strokeWidth = 2;
 popSeriesFemale.fillOpacity = 0.5;
-popSeriesFemale.tooltipText = "[bold]Població Oliva en {dateX}[/]\n[font-size: 20]Home: {col5}\nDona: {col6}";
+popSeriesFemale.tooltipText = "[bold]Població Oliva en {dateX}[/]\n[font-size: 20]Home: {col4}\nDona: {col5}";
 popSeriesFemale.name = "Dona";
 
+
+// Grafic de punts
 popChart.dataSource.url = "un_population.csv";
 popChart.dataSource.parser = new am4core.CSVParser();
-popChart.dataSource.parser.options.numberFields = ["col4", "col5", "col6"];
+popChart.dataSource.parser.options.numberFields = ["col4", "col6", "col6"];
 popChart.dataSource.adapter.add("parsedData", function(data) {
   am4core.array.each(data, function(item) {
     if (item.col3.getFullYear() == currentYear) {

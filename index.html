@@ -5,30 +5,54 @@
   <meta charset="UTF-8">
   <title>CodePen - amCharts 4: Dynamic population pyramid chart</title>
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./normalize.css">
 
 </head>
 
 <body>
-  <div class="d-flex">
-    <div class="d-flex row-direction">
-      <img src="./openData.png" alt="" srcset="">
+    <div class="d-flex orientacion ">
+      <a class="p-absolute" href="https://www.oliva.es">
+        <img class="" src="https://www.oliva.es/sites/www.oliva.es/files/Ayuntamiento/logo/logo-cabecera-oliva.png" alt="" srcset="">
+      </a>
+      <img src="./openData.png" class="" alt="" srcset="">
     </div>
-    
+
   </div>
-  <div class="d-flex">
-    <a class="btn-primary" href="" id="txt">TXT</a>
-    <a class="btn-primary" href="" id="xls">XLS</a>
-    <a class="btn-primary" href="./index.csv" id="csv">CSV</a>
+  <div class="d-flex orientacion">
+    <a class="btn-primary text-decoration-none" href="./un_population_age_groups.csv" id="csv">CSV</a>
+    <a class="btn-primary text-decoration-none" href="./un_population_age_groups.txt" id="txt">TXT</a>
+    <a class="btn-primary text-decoration-none" href="./un_population_age_groups.xml" id="xml">XML</a>
+    <a class="btn-primary text-decoration-none" href="./un_population_age_groups.xls" id="xls">XLS</a>
   </div>
-  <!-- partial:index.partial.html -->
+
   <script src="//www.amcharts.com/lib/4/core.js"></script>
   <script src="//www.amcharts.com/lib/4/charts.js"></script>
   <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
   <script src="//www.amcharts.com/lib/4/themes/dataviz.js"></script>
   <div id="chartdiv"></div>
-  <!-- partial -->
+  <div>
+    <div>
+      Ultima actualització 11/2022
+    </div>
+    <div>
+      <small>Dades extretes de l'
+        <a class="text-decoration-none" href="https://pegv.gva.es/va/">IVE(Institut Valencià d'Estadística)</a>
+      </small>
+    </div>
+  </div>
+  <footer class="footer">
+        <img class="footer-img" src="./oliva.png" alt="" srcset="">
+        <h5 class="h5">Ajuntament d'Oliva</h5>
+        <ul class="llista">
+          <li>Ajuntament d'Oliva</li>
+          <li>Adreça: Pl. Ajuntament, 1 - CP: 46780</li>
+          <a href="tel:+"></a>
+          <a href="mailto:"></a>
+          <li> Telèfon: <a class="text-decoration-none text-white" href="tel:+34 962 850 250">+34 962 850 250</a> Fax: <a class="text-decoration-none text-white"  href="tel://+34 962 839 772">+34 962 839 772</a></li>
+          <li>Correu: <a class="text-decoration-none text-white" href="mailto://info@oliva.es">info@oliva.es</a></li>
+        </ul>
+  </footer>
   <script src="./script.js"></script>
-
 </body>
 
 </html>
