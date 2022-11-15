@@ -16,9 +16,10 @@ body {
   justify-self: center;
 }
 .footer{
-  height: 375px;
+  height: 565px;
   background-color: #5b6770;
   color:white;
+  gap: 0px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -54,6 +55,7 @@ body {
   width: 100%;
   height: auto;
 }
+
 .btn-primary {background-color: #00A3AD;
   border: none;
   margin: 10px 20px;
@@ -80,9 +82,13 @@ color: white;
 
 
 @media screen and (min-width:769px) {
-
+ 
   .orientacion{
     flex-direction: row;
+  }
+  .footer{
+    height: 375px;
+    gap: 50px;
   }
   
   #chartdiv {
