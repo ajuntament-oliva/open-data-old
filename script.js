@@ -17,22 +17,21 @@ var container = am4core.create("chartdiv", am4core.Container);
 container.width = am4core.percent(100);
 container.height = am4core.percent(100);
 // container.layout = "vertical"
-if(w<768){
+if (w>400 && w < 768) {
   container.layout = "vertical";
-}else{
+} else {
   container.layout = "horizontal";
 }
-  // window.addEventListener("resize",(e)=>{
-  //   console.log(window.innerWidth);
-  //   redimensionar();
-
-  // });
-const redimensionar=()=>{
+window.addEventListener("resize", (e) => {
+  console.log(window.innerWidth);
+  redimensionar();
+});
+const redimensionar = () => {
   var w = window.innerWidth;
   console.log(w);
-  if(w<768){
+  if (w < 768) {
     container.layout = "vertical";
-  }else{
+  } else {
     container.layout = "horizontal";
   }
 }
@@ -88,8 +87,8 @@ popSeriesFemale.name = "Dona";
 popChart.dataSource.url = "un_population.csv";
 popChart.dataSource.parser = new am4core.CSVParser();
 popChart.dataSource.parser.options.numberFields = ["col4", "col6", "col6"];
-popChart.dataSource.adapter.add("parsedData", function(data) {
-  am4core.array.each(data, function(item) {
+popChart.dataSource.adapter.add("parsedData", function (data) {
+  am4core.array.each(data, function (item) {
     if (item.col3.getFullYear() == currentYear) {
       item.dash = "3,3";
       item.opacity = 0.3;
@@ -100,17 +99,17 @@ popChart.dataSource.adapter.add("parsedData", function(data) {
 
 popChart.cursor = new am4charts.XYCursor();
 popChart.snapToSeries = popSeriesFemale;
-popChart.cursor.events.on("cursorpositionchanged", function(ev) {
+popChart.cursor.events.on("cursorpositionchanged", function (ev) {
   currentYear = popXAxis.positionToDate(popXAxis.toAxisPosition(ev.target.xPosition)).getFullYear().toString();
   updateData();
 });
 
-popChart.cursor.events.on("hidden", function(ev) {
+popChart.cursor.events.on("hidden", function (ev) {
   var currentYear = new Date().getFullYear().toString();
   updateData();
 });
-let ocultar=document.querySelector("g[aria-labelledby='id-39-title']");
-ocultar.style.display="none";
+let ocultar = document.querySelector("g[aria-labelledby='id-39-title']");
+ocultar.style.display = "none";
 ocultar.classList.add("d-none");
 
 /**
@@ -119,27 +118,27 @@ ocultar.classList.add("d-none");
 
 var pyramidChart = container.createChild(am4charts.XYChart);
 // am4themes_myTheme(pyramidChart);
-pyramidChart.numberFormatter.numberFormat = "#,###.#a";
+pyramidChart.numberFormatter.numberFormat = "#.###,#a";
 pyramidChart.numberFormatter.bigNumberPrefixes = [
-  { "number": 1e+3, "suffix": "M" }
+  { "number": 1e+0, "suffix": "" }
 ];
 
 pyramidChart.dataSource.url = "poblacio.csv";
 pyramidChart.dataSource.parser = new am4core.CSVParser();
 pyramidChart.dataSource.parser.options.numberFields = ["col5", "col6", "col7"];
-pyramidChart.dataSource.events.on("parseended", function(ev) {
+pyramidChart.dataSource.events.on("parseended", function (ev) {
   sourceData = ev.target.data;
   ev.target.data = getCurrentData();
 });
 
 function getCurrentData() {
   var currentData = [];
-  am4core.array.each(sourceData, function(row, i) {
+  am4core.array.each(sourceData, function (row, i) {
     if (row.col3 == currentYear) {
       currentData.push(row);
     }
   });
-  currentData.sort(function(a, b) {
+  currentData.sort(function (a, b) {
     var a1 = Number(a.col4.replace(/[^0-9]+.*$/, ""));
     var b1 = Number(b.col4.replace(/[^0-9]+.*$/, ""));
     if (a1 > b1) {
@@ -158,7 +157,7 @@ function updateData() {
   if (data.length == 0) {
     return;
   }
-  am4core.array.each(pyramidChart.data, function(row, i) {
+  am4core.array.each(pyramidChart.data, function (row, i) {
     if (!data[i]) {
       pyramidChart.data[i].col5 = 0;
       pyramidChart.data[i].col6 = 0;
@@ -169,7 +168,7 @@ function updateData() {
     }
   });
   pyramidChart.invalidateRawData();
-  
+
   // Set title
   pyramidChart.titles.getIndex(0).text = currentYear;
 }
@@ -211,7 +210,7 @@ pyramidYAxis.dataFields.category = "col4";
 pyramidYAxis.renderer.minGridDistance = 10;
 pyramidYAxis.renderer.grid.template.location = 0;
 pyramidYAxis.title.text = "Grups d'edat";
-pyramidYAxis.renderer.labels.template.adapter.add("textOutput", function(text, target) {
+pyramidYAxis.renderer.labels.template.adapter.add("textOutput", function (text, target) {
   if (text == "80-84") {
     text += "";
   }

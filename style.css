@@ -75,13 +75,16 @@ color: white;
 }
 
 .orientacion{
-  flex-direction: row;
+  flex-direction: column;
 }
 
 
 @media screen and (min-width:769px) {
 
- 
+  .orientacion{
+    flex-direction: row;
+  }
+  
   #chartdiv {
     width: 100%;
     height: 800px;
