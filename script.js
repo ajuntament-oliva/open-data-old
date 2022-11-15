@@ -41,7 +41,7 @@ popChart.marginLeft = 15;
 popChart.data = [{}];
 
 var popSubtitle = popChart.titles.create();
-popSubtitle.text = "";
+popSubtitle.text = "Passa el cursor sobre el gràfic per a verificar la informació";
 
 var popTitle = popChart.titles.create();
 popTitle.text = "Població Oliva";
