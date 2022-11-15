@@ -37,6 +37,82 @@ const redimensionar=()=>{
   }
 }
 
+var popChart = container.createChild(am4charts.XYChart);
+popChart.marginLeft = 15;
+popChart.data = [{}];
+
+var popSubtitle = popChart.titles.create();
+popSubtitle.text = "";
+
+var popTitle = popChart.titles.create();
+popTitle.text = "Població Oliva";
+popTitle.fontSize = 20;
+
+popChart.numberFormatter.numberFormat = "#.###,#a";
+popChart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1, "suffix": "" }
+];
+
+popChart.dateFormatter.dateFormat = "yyyy";
+
+var popXAxis = popChart.xAxes.push(new am4charts.DateAxis());
+popXAxis.renderer.minGridDistance = 40;
+
+var popYAxis = popChart.yAxes.push(new am4charts.ValueAxis());
+popYAxis.renderer.opposite = true;
+
+var popSeriesMale = popChart.series.push(new am4charts.LineSeries());
+
+popSeriesMale.dataFields.dateX = "col3";
+popSeriesMale.dataFields.valueY = "col4";
+popSeriesMale.propertyFields.strokeDasharray = "dash";
+popSeriesMale.propertyFields.fillOpacity = "opacity";
+popSeriesMale.stacked = true;
+popSeriesMale.strokeWidth = 2;
+popSeriesMale.fillOpacity = 0.5;
+popSeriesMale.name = "Home";
+
+var popSeriesFemale = popChart.series.push(new am4charts.LineSeries());
+popSeriesFemale.dataFields.dateX = "col3";
+popSeriesFemale.dataFields.valueY = "col5";
+popSeriesFemale.propertyFields.strokeDasharray = "dash";
+popSeriesFemale.propertyFields.fillOpacity = "opacity";
+popSeriesFemale.stacked = true;
+popSeriesFemale.strokeWidth = 2;
+popSeriesFemale.fillOpacity = 0.5;
+popSeriesFemale.tooltipText = "[bold]Població Oliva en {dateX}[/]\n[font-size: 20]Home: {col4}\nDona: {col5}";
+popSeriesFemale.name = "Dona";
+
+
+// Grafic de punts
+popChart.dataSource.url = "un_population.csv";
+popChart.dataSource.parser = new am4core.CSVParser();
+popChart.dataSource.parser.options.numberFields = ["col4", "col6", "col6"];
+popChart.dataSource.adapter.add("parsedData", function(data) {
+  am4core.array.each(data, function(item) {
+    if (item.col3.getFullYear() == currentYear) {
+      item.dash = "3,3";
+      item.opacity = 0.3;
+    }
+  });
+  return data;
+});
+
+popChart.cursor = new am4charts.XYCursor();
+popChart.snapToSeries = popSeriesFemale;
+popChart.cursor.events.on("cursorpositionchanged", function(ev) {
+  currentYear = popXAxis.positionToDate(popXAxis.toAxisPosition(ev.target.xPosition)).getFullYear().toString();
+  updateData();
+});
+
+popChart.cursor.events.on("hidden", function(ev) {
+  var currentYear = new Date().getFullYear().toString();
+  updateData();
+});
+let ocultar=document.querySelector("g[aria-labelledby='id-39-title']");
+ocultar.style.display="none";
+ocultar.classList.add("d-none");
+
 /**
  * Population pyramid chart
  */
@@ -176,78 +252,3 @@ note.align = "center";
 /**
  * Create population chart
  */
-var popChart = container.createChild(am4charts.XYChart);
-popChart.marginLeft = 15;
-popChart.data = [{}];
-
-var popSubtitle = popChart.titles.create();
-popSubtitle.text = "";
-
-var popTitle = popChart.titles.create();
-popTitle.text = "Població Oliva";
-popTitle.fontSize = 20;
-
-popChart.numberFormatter.numberFormat = "#.###,#a";
-popChart.numberFormatter.bigNumberPrefixes = [
-  { "number": 1, "suffix": "" }
-];
-
-popChart.dateFormatter.dateFormat = "yyyy";
-
-var popXAxis = popChart.xAxes.push(new am4charts.DateAxis());
-popXAxis.renderer.minGridDistance = 40;
-
-var popYAxis = popChart.yAxes.push(new am4charts.ValueAxis());
-popYAxis.renderer.opposite = true;
-
-var popSeriesMale = popChart.series.push(new am4charts.LineSeries());
-
-popSeriesMale.dataFields.dateX = "col3";
-popSeriesMale.dataFields.valueY = "col4";
-popSeriesMale.propertyFields.strokeDasharray = "dash";
-popSeriesMale.propertyFields.fillOpacity = "opacity";
-popSeriesMale.stacked = true;
-popSeriesMale.strokeWidth = 2;
-popSeriesMale.fillOpacity = 0.5;
-popSeriesMale.name = "Home";
-
-var popSeriesFemale = popChart.series.push(new am4charts.LineSeries());
-popSeriesFemale.dataFields.dateX = "col3";
-popSeriesFemale.dataFields.valueY = "col5";
-popSeriesFemale.propertyFields.strokeDasharray = "dash";
-popSeriesFemale.propertyFields.fillOpacity = "opacity";
-popSeriesFemale.stacked = true;
-popSeriesFemale.strokeWidth = 2;
-popSeriesFemale.fillOpacity = 0.5;
-popSeriesFemale.tooltipText = "[bold]Població Oliva en {dateX}[/]\n[font-size: 20]Home: {col4}\nDona: {col5}";
-popSeriesFemale.name = "Dona";
-
-
-// Grafic de punts
-popChart.dataSource.url = "un_population.csv";
-popChart.dataSource.parser = new am4core.CSVParser();
-popChart.dataSource.parser.options.numberFields = ["col4", "col6", "col6"];
-popChart.dataSource.adapter.add("parsedData", function(data) {
-  am4core.array.each(data, function(item) {
-    if (item.col3.getFullYear() == currentYear) {
-      item.dash = "3,3";
-      item.opacity = 0.3;
-    }
-  });
-  return data;
-});
-
-popChart.cursor = new am4charts.XYCursor();
-popChart.snapToSeries = popSeriesFemale;
-popChart.cursor.events.on("cursorpositionchanged", function(ev) {
-  currentYear = popXAxis.positionToDate(popXAxis.toAxisPosition(ev.target.xPosition)).getFullYear().toString();
-  updateData();
-});
-
-popChart.cursor.events.on("hidden", function(ev) {
-  var currentYear = new Date().getFullYear().toString();
-  updateData();
-});
-let ocultar=document.querySelector("g[aria-labelledby='id-39-title']");
-ocultar.style.display="none";
-ocultar.classList.add("d-none");

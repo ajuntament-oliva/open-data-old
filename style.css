@@ -4,7 +4,7 @@ body {
 
 #chartdiv {
   width: 100%;
-  height: 675px;
+  height: 525px;
 }
 
 .d-flex{
@@ -75,15 +75,13 @@ color: white;
 }
 
 .orientacion{
-  flex-direction: column;
+  flex-direction: row;
 }
 
 
 @media screen and (min-width:769px) {
+
  
-  .orientacion{
-    flex-direction: row;
-  }
   #chartdiv {
     width: 100%;
     height: 800px;
