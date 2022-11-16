@@ -17,7 +17,7 @@ var container = am4core.create("chartdiv", am4core.Container);
 container.width = am4core.percent(100);
 container.height = am4core.percent(100);
 // container.layout = "vertical"
-if (w>400 && w < 768) {
+if ( w < 768) {
   container.layout = "vertical";
 } else {
   container.layout = "horizontal";
@@ -179,11 +179,11 @@ var sourceData = [];
 
 var pyramidXAxisMale = pyramidChart.xAxes.push(new am4charts.ValueAxis());
 pyramidXAxisMale.min = 0;
-pyramidXAxisMale.max = 2000;
+pyramidXAxisMale.max = 1000;
 
 var maleRange = pyramidXAxisMale.axisRanges.create();
 maleRange.value = 0;
-maleRange.endValue = 2000;
+maleRange.endValue = 1000;
 maleRange.label.text = "Homes";
 maleRange.label.inside = true;
 maleRange.label.valign = "top";
@@ -191,12 +191,12 @@ maleRange.label.fontSize = 20;
 maleRange.label.fill = pyramidChart.colors.getIndex(0);
 var pyramidXAxisFemale = pyramidChart.xAxes.push(new am4charts.ValueAxis());
 pyramidXAxisFemale.min = 0;
-pyramidXAxisFemale.max = 2000;
+pyramidXAxisFemale.max = 1000;
 pyramidXAxisFemale.renderer.inversed = true;
 
 var maleRange = pyramidXAxisFemale.axisRanges.create();
 maleRange.value = 0;
-maleRange.endValue = 2000;
+maleRange.endValue = 1000;
 maleRange.label.text = "Dones";
 maleRange.label.inside = true;
 maleRange.label.valign = "top";
