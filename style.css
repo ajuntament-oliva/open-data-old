@@ -46,7 +46,9 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+.flex-row{
+  flex-direction: column;
+}
 
 .llista{
   list-style: none;
@@ -87,7 +89,11 @@ color: white;
 }
 .footer{
   display: grid;
-  grid-template-columns: repeat(1, minmax(24%, 1fr));
+  grid-template-columns: repeat(1, minmax(100%, 1fr));
+}
+
+.mb-33vh{
+  height: 33vh;
 }
 
 @media screen and (min-width: 577px) and (max-width: 768px){
@@ -97,18 +103,19 @@ color: white;
   }
   .footer{
     display: grid;
-    grid-template-columns: repeat(2, minmax(24%, 1fr));
+    gap: 2.5rem;
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
     justify-content: center;
   }
 }
 
 @media screen and (min-width:769px) and (max-width:992px) {
   #chartdiv{
-    width: 100%;
+    width: 90%;
     height: 800px;
   }
   .footer{
-    grid-template-columns: repeat(3, minmax(24%, 1fr));
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
     justify-content: center;
   }
 }
@@ -118,11 +125,11 @@ color: white;
     height: 800px;
   }
   .footer{
-    grid-template-columns: repeat(auto, minmax(24%, 1fr));
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
     justify-content: center;
   }
 }
-@media screen and (max-width:1400px) {
+@media screen  and (min-width:1201px) {
   #chartdiv{
     width: 80%;
     height: 800px;
