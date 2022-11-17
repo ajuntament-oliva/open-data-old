@@ -17,7 +17,7 @@ var container = am4core.create("chartdiv", am4core.Container);
 container.width = am4core.percent(100);
 container.height = am4core.percent(100);
 // container.layout = "vertical"
-if ( w < 768) {
+if (w>400 && w < 768) {
   container.layout = "vertical";
 } else {
   container.layout = "horizontal";
@@ -235,7 +235,8 @@ pyramidSeriesFemale.name = "Dones";
 pyramidSeriesFemale.xAxis = pyramidXAxisFemale;
 pyramidSeriesFemale.clustered = false;
 pyramidSeriesFemale.columns.template.tooltipText = "Dones, edad{categoryY}: {valueX} ({valueX.percent.formatNumber('#.0')}%)";
-
+am4themes_myTheme(pyramidSeriesFemale.fill)
+am4themes_myTheme(pyramidSeriesFemale.stroke)
 var pyramidTitle = pyramidChart.titles.create();
 pyramidTitle.text = currentYear;
 pyramidTitle.fontSize = 20;
