@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Ajuntament d'Oliva - Open data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./normalize.css">
   <link rel="shortcut icon" href="./olivaOf.png" type="image/x-icon">
@@ -12,10 +13,10 @@
 
 <body>
     <div class="d-flex orientacion ">
-      <a class="p-absolute element" href="https://www.oliva.es">
-        <img class="element" src="https://www.oliva.es/sites/www.oliva.es/files/Ayuntamiento/logo/logo-cabecera-oliva.png" alt="" srcset="">
+      <a class="p-absolute element img-responsive" href="https://www.oliva.es">
+        <img class="element img-responsive" src="https://www.oliva.es/sites/www.oliva.es/files/Ayuntamiento/logo/logo-cabecera-oliva.png" alt="" srcset="">
       </a>
-      <img src="./openData.png" class="element" alt="" srcset="">
+      <img src="./openData.png" class="element img-responsive" alt="" srcset="">
     </div>
 
   </div>
@@ -31,25 +32,21 @@
   <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
   <script src="//www.amcharts.com/lib/4/themes/dataviz.js"></script>
   <div id="chartdiv"></div>
-  <div>
-    
-    <div>
-     
-      
-  </div>
-  <div></div>
+ 
+  <!-- <div class="mb-33vh">&nbsp;</div> -->
   <footer class="footer">
-        <img class="footer-img" src="./oliva.png" alt="" srcset="">
-        <h5 class="h5">Ajuntament d'Oliva</h5>
+        <div class="d-flex">
+          <img class="footer-img" src="./oliva.png" alt="" srcset="">
+          <h5 class="h5">Ajuntament d'Oliva</h5>
+        </div>
         <ul class="llista">
           <li>Ajuntament d'Oliva</li>
-          <li>Adreça: Pl. Ajuntament, 1 - CP: 46780</li>
-          <a href="tel:+"></a>
-          <a href="mailto:"></a>
-          <li> Telèfon: <a class="text-decoration-none text-white" href="tel:+34 962 850 250">+34 962 850 250</a> Fax: <a class="text-decoration-none text-white"  href="tel://+34 962 839 772">+34 962 839 772</a></li>
+          <li>Adreça: Pl. Ajuntament, 1 -  <br>CP: 46780</li>
+          <li> Telèfon: <a class="text-decoration-none text-white" href="tel:+34 962 850 250">+34 962 850 250</a></li>
+          <li>Fax: <a class="text-decoration-none text-white"  href="tel://+34 962 839 772">+34 962 839 772</a></li>
           <li>Correu: <a class="text-decoration-none text-white" href="mailto://info@oliva.es">info@oliva.es</a></li>
         </ul>
-        <div class="contenedor">
+        <div class="contenedor d-flex flex-row">
           <p><b>Dades extretes de l'
           </b></p>
           <a href="https://pegv.gva.es/va">
@@ -59,8 +56,8 @@
             Ultima actualització: Novembre del 2022
           </div>
         </div>
-        
-          <img src="./qr.png" alt="" srcset="">
+       
+          <!-- <img src="./qr.png" alt="" class="d-none" srcset=""> -->
       </div>
   </footer>
   <script src="./script.js"></script>
